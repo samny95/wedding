@@ -13,7 +13,7 @@ import Location from "../components/location";
 import CongratulatoryMoney from "../components/congratulatoryMoney";
 import Share from "../components/share";
 import Quote from "../components/quote";
-import Song from "../assets/song.mp3";
+import Song from "../assets/[MapleStory BGM] Amoria.mp3";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
