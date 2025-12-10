@@ -6,7 +6,7 @@ import {
   GROOM_NAME,
   BRIDE_NAME,
 } from "../../config.js";
-import GroovePaper from "../assets/GroovePaper.png";
+import TitleImage from "../assets/25-1.jpg";
 
 const Layout = styled.div`
   width: 70%;
@@ -66,7 +66,7 @@ const Title = () => {
       </TitleWrapper>
 
       {/* replaced the <video> with an <img> */}
-      <ImageBackground src={GroovePaper} alt="wedding background" />
+      <ImageBackground src={TitleImage} alt="wedding background" />
     </Layout>
   );
 };

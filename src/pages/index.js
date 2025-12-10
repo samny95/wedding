@@ -43,11 +43,36 @@ const IndexPage = () => {
     AOS.init({
       duration: 1500,
     });
+    
+    // Enable audio after user interaction
+    const enableAudio = () => {
+      const audio = document.getElementById('bgMusic');
+      if (audio && audio.muted) {
+        audio.muted = false;
+        audio.play().catch(e => console.log('Audio play failed:', e));
+      }
+      // Remove listeners after first interaction
+      document.removeEventListener('click', enableAudio);
+      document.removeEventListener('touchstart', enableAudio);
+      document.removeEventListener('scroll', enableAudio);
+    };
+    
+    // Add multiple event listeners for better compatibility
+    document.addEventListener('click', enableAudio);
+    document.addEventListener('touchstart', enableAudio);
+    document.addEventListener('scroll', enableAudio);
+    
+    return () => {
+      document.removeEventListener('click', enableAudio);
+      document.removeEventListener('touchstart', enableAudio);
+      document.removeEventListener('scroll', enableAudio);
+    };
   });
   return (
     <Wrapper>
-      <audio autoPlay loop>
-        <source src={Song} />
+      <audio id="bgMusic" autoPlay loop muted>
+        <source src={Song} type="audio/mpeg" />
+        Your browser does not support the audio element.
       </audio>
       <Title />
       <Greeting />
