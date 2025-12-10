@@ -47,8 +47,8 @@ const Location = () => {
   const executeScript = () => {
     const scriptTag = document.createElement("script");
     const inlineScript = document.createTextNode(`new daum.roughmap.Lander({
-    "timestamp" : "1652464367301",
-    "key" : "2a8fe",
+    "timestamp" : "1765379970946",
+    "key" : "dnt384i332o",
     "mapWidth" : "640",
     "mapHeight" : "360"
   }).render();`);
@@ -99,27 +99,29 @@ const Location = () => {
       </Divider>
       <Image src={Flower} />
       <Map
-        id="daumRoughmapContainer1652464367301"
+        id="daumRoughmapContainer1765379220614"
         className="root_daum_roughmap root_daum_roughmap_landing"
       ></Map>
       <Content>
-        대구 수성구 두산동 888-2번지
+        서울 강남구 논현로 645
         <br />
-        호텔수성 수성스퀘어 3층 피오니홀
+        호텔 엘리에나 5층 그랜드볼룸
         <br />
         <br />
         <Title>버스 이용시</Title>
         <br />
         <br />
-        410-1, 401 호텔수성 앞 하차
+        147, 241, 463, 3412, 4211 논현동고개(23-119) 하차 후 학동역 방면 도보 130m
         <br />
-        수성1-1, 수성3-1, 814 TBC방송국 앞 하차
+        147, 463, 4211 논현고개(23-146) 하차 후 맞은편 도보 140m
         <br />
         <br />
         <Title>지하철 이용시</Title>
         <br />
         <br />
-        3호선 수성못역 하차 (도보 10분)
+        7호선 학동역(4번 출구) 하차 (도보 4분)
+        <br />
+        9호선 언주역(2번 출구) 하차 (도보 6분)
       </Content>
     </Wrapper>
   );

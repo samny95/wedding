@@ -4,5 +4,27 @@ module.exports = {
     title: `weddingInvitation`,
     siteUrl: `https://www.yourdomain.tld`
   },
-  plugins: ["gatsby-plugin-styled-components"]
+  plugins: [
+    "gatsby-plugin-styled-components",
+    {
+      resolve: `gatsby-plugin-sharp`,
+    },
+    {
+      resolve: `gatsby-transformer-sharp`,
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `assets`,
+        path: `${__dirname}/src/assets`,
+      },
+    },
+  ]
 };
