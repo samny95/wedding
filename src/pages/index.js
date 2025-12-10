@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Layout } from "antd";
 import styled from "styled-components";
 import "react-image-gallery/styles/css/image-gallery.css";
@@ -27,7 +27,55 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
+const MusicButton = styled.button`
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #d7ccc8;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+    fill: #8d6e63;
+  }
+
+  @media (max-width: 768px) {
+    width: 50px;
+    height: 50px;
+    bottom: 20px;
+    right: 20px;
+    
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+`;
+
 const IndexPage = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+
   useEffect(() => {
     const script = document.createElement("script");
     script.async = true;
@@ -49,7 +97,9 @@ const IndexPage = () => {
       const audio = document.getElementById('bgMusic');
       if (audio && audio.muted) {
         audio.muted = false;
-        audio.play().catch(e => console.log('Audio play failed:', e));
+        audio.play().then(() => {
+          setIsPlaying(true);
+        }).catch(e => console.log('Audio play failed:', e));
       }
       // Remove listeners after first interaction
       document.removeEventListener('click', enableAudio);
@@ -68,12 +118,38 @@ const IndexPage = () => {
       document.removeEventListener('scroll', enableAudio);
     };
   });
+
+  const toggleMusic = () => {
+    const audio = document.getElementById('bgMusic');
+    if (audio) {
+      if (audio.paused) {
+        audio.play().then(() => {
+          setIsPlaying(true);
+        }).catch(e => console.log('Audio play failed:', e));
+      } else {
+        audio.pause();
+        setIsPlaying(false);
+      }
+    }
+  };
+
   return (
     <Wrapper>
       <audio id="bgMusic" autoPlay loop muted>
         <source src={Song} type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
+      <MusicButton onClick={toggleMusic} aria-label={isPlaying ? "Pause music" : "Play music"}>
+        {isPlaying ? (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+          </svg>
+        ) : (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        )}
+      </MusicButton>
       <Title />
       <Greeting />
       <Gallery />
