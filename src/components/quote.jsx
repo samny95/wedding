@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { StaticImage } from "gatsby-plugin-image";
 import QuotePaper from "../assets/Quote.png";
-import Flower from "../assets/flower1.png";
 
 const Wrapper = styled.div`
   padding-top: 42px;
@@ -37,7 +37,14 @@ const Image = styled.img`
 const Quote = () => {
   return (
     <Wrapper>
-      <Image src={Flower} data-aos="fade-up" />
+      <StaticImage
+        src="../assets/flower1.png"
+        alt="flower decoration"
+        placeholder="blurred"
+        width={22}
+        style={{ display: "block", margin: "0 auto", paddingBottom: "42px" }}
+        data-aos="fade-up"
+      />
       <Content data-aos="fade-up">
         장담하건대. 세상이 다 겨울이어도
         <br />

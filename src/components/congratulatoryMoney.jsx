@@ -3,7 +3,7 @@ import { Button, Divider, message, Modal } from "antd";
 import { CheckCircleTwoTone } from "@ant-design/icons";
 import styled from "styled-components";
 import CopyToClipboard from "react-copy-to-clipboard";
-import Flower from "../assets/flower3.png";
+import { StaticImage } from "gatsby-plugin-image";
 import {
   GROOM_NAME,
   GROOM_ACCOUNT_NUMBER,
@@ -89,7 +89,13 @@ const CongratulatoryMoney = () => {
       >
         <Title>축하의 마음을 전하세요</Title>
       </Divider>
-      <Image src={Flower} />
+      <StaticImage
+        src="../assets/flower3.png"
+        alt="flower decoration"
+        placeholder="blurred"
+        width={22}
+        style={{ display: "block", margin: "0 auto", paddingBottom: "42px" }}
+      />
       <Content data-aos="fade-up">
         축하의 마음을 담아 축의금을 전달해 보세요.
       </Content>

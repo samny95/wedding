@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { StaticImage } from "gatsby-plugin-image";
 import {
   WEDDING_DATE,
   WEDDING_LOCATION,
   GROOM_NAME,
   BRIDE_NAME,
 } from "../../config.js";
-import TitleImage from "../assets/25-1.jpg";
 
 const Layout = styled.div`
   width: 70%;
@@ -66,7 +66,14 @@ const Title = () => {
       </TitleWrapper>
 
       {/* replaced the <video> with an <img> */}
-      <ImageBackground src={TitleImage} alt="wedding background" />
+      <StaticImage 
+        src="../assets/25-1.jpg" 
+        alt="wedding background"
+        placeholder="blurred"
+        quality={80}
+        formats={["auto", "webp"]}
+        style={{ width: "100%", display: "block" }}
+      />
     </Layout>
   );
 };
