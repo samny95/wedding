@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Divider } from "antd";
-import { StaticImage } from "gatsby-plugin-image";
 import {
   GROOM_NAME,
   GROOM_FATHER_NAME,
@@ -10,6 +9,7 @@ import {
   BRIDE_FATHER_NAME,
   BRIDE_MOTHER_NAME,
 } from "../../config";
+import Flower from "../assets/flower1.png";
 
 const Wrapper = styled.div`
   padding-top: 42px;
@@ -57,14 +57,7 @@ const Greeting = () => {
       <Divider style={{ marginTop: 32, marginBottom: 32 }} plain>
         <Title data-aos="fade-up">초대합니다</Title>
       </Divider>
-      <StaticImage
-        src="../assets/flower1.png"
-        alt="flower decoration"
-        placeholder="blurred"
-        width={22}
-        style={{ display: "block", margin: "0 auto", paddingBottom: "42px" }}
-        data-aos="fade-up"
-      />
+      <Image data-aos="fade-up" src={Flower} />
       <Content data-aos="fade-up">
         서로 마주 보며 다져온 사랑을
         <br />

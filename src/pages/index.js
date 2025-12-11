@@ -13,6 +13,8 @@ import Location from "../components/location";
 import CongratulatoryMoney from "../components/congratulatoryMoney";
 import Share from "../components/share";
 import Quote from "../components/quote";
+import Song from "../assets/[MapleStory BGM] Amoria.mp3";
+
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -133,8 +135,8 @@ const IndexPage = () => {
 
   return (
     <Wrapper>
-      <audio id="bgMusic" loop muted preload="none">
-        <source src="https://cdn.jsdelivr.net/gh/samny95/wedding@main/src/assets/[MapleStory%20BGM]%20Amoria.mp3" type="audio/mpeg" />
+      <audio id="bgMusic" autoPlay loop muted>
+        <source src={Song} type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
       <MusicButton onClick={toggleMusic} aria-label={isPlaying ? "Pause music" : "Play music"}>

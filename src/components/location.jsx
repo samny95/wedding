@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Divider } from "antd";
 import styled from "styled-components";
-import { StaticImage } from "gatsby-plugin-image";
+import Flower from "../assets/flower2.png";
 
 const Wrapper = styled.div`
   padding-top: 42px;
@@ -97,13 +97,7 @@ const Location = () => {
       <Divider plain style={{ marginTop: 0, marginBottom: 32 }}>
         <Title>오시는 길</Title>
       </Divider>
-      <StaticImage
-        src="../assets/flower2.png"
-        alt="flower decoration"
-        placeholder="blurred"
-        width={22}
-        style={{ display: "block", margin: "0 auto", paddingBottom: "42px" }}
-      />
+      <Image src={Flower} />
       <Map
         id="daumRoughmapContainer1765379220614"
         className="root_daum_roughmap root_daum_roughmap_landing"

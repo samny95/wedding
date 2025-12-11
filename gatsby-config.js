@@ -9,15 +9,6 @@ module.exports = {
     "gatsby-plugin-image",
     {
       resolve: `gatsby-plugin-sharp`,
-      options: {
-        defaults: {
-          formats: [`auto`, `webp`],
-          placeholder: `blurred`,
-          quality: 75,
-          breakpoints: [750, 1080, 1366, 1920],
-          backgroundColor: `transparent`,
-        },
-      },
     },
     {
       resolve: `gatsby-transformer-sharp`,
