@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Divider } from "antd";
 import styled from "styled-components";
 import Flower from "../assets/flower2.png";
+import MapImage from "../assets/map.jpg";
 
 const Wrapper = styled.div`
   padding-top: 42px;
@@ -40,6 +41,17 @@ const Map = styled.div`
   padding: 0;
 `;
 
+const MapImg = styled.img`
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto 0;
+  display: block;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
+`;
+
 const Location = () => {
   // 카카오 맵 불러오기
 
@@ -47,8 +59,8 @@ const Location = () => {
   const executeScript = () => {
     const scriptTag = document.createElement("script");
     const inlineScript = document.createTextNode(`new daum.roughmap.Lander({
-    "timestamp" : "1765379970946",
-    "key" : "dnt384i332o",
+    "timestamp" : "1765440937193",
+    "key" : "dp5eokzbpfn",
     "mapWidth" : "640",
     "mapHeight" : "360"
   }).render();`);
@@ -99,9 +111,10 @@ const Location = () => {
       </Divider>
       <Image src={Flower} />
       <Map
-        id="daumRoughmapContainer1765379220614"
+        id="daumRoughmapContainer1765440937193"
         className="root_daum_roughmap root_daum_roughmap_landing"
       ></Map>
+      <MapImg src={MapImage} alt="Location Map" />
       <Content>
         서울 강남구 논현로 645
         <br />
