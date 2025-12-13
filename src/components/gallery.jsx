@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Divider } from "antd";
@@ -148,7 +148,7 @@ const Gallery = () => {
         nodes {
           name
           childImageSharp {
-            gatsbyImageData(
+            thumbnail: gatsbyImageData(
               width: 600
               height: 600
               placeholder: BLURRED
@@ -160,7 +160,7 @@ const Gallery = () => {
               width: 2400
               placeholder: BLURRED
               formats: [AUTO, WEBP]
-              quality: 90
+              quality: 95
               transformOptions: { fit: INSIDE }
             )
           }
@@ -194,6 +194,29 @@ const Gallery = () => {
     setSelectedImage((prev) => (prev < images.length - 1 ? prev + 1 : 0));
   };
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (selectedImage === null) return;
+      
+      switch (e.key) {
+        case 'Escape':
+          setSelectedImage(null);
+          break;
+        case 'ArrowLeft':
+          handlePrevious();
+          break;
+        case 'ArrowRight':
+          handleNext();
+          break;
+        default:
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImage]);
+
   return (
     <Wrapper>
       <Divider style={{ marginTop: 0, marginBottom: 32 }} plain>
@@ -201,7 +224,7 @@ const Gallery = () => {
       </Divider>
       <GridContainer>
         {images.map((image, index) => {
-          const imageData = getImage(image.childImageSharp);
+          const imageData = getImage(image.childImageSharp.thumbnail);
           return (
             <ImageWrapper key={image.name} onClick={() => handleImageClick(index)}>
               <GatsbyImage image={imageData} alt={`Gallery ${index + 1}`} />
