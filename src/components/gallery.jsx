@@ -149,18 +149,18 @@ const Gallery = () => {
           name
           childImageSharp {
             gatsbyImageData(
-              width: 400
-              height: 400
-              placeholder: BLURRED
-              formats: [AUTO, WEBP]
-              quality: 75
-              transformOptions: { fit: COVER, cropFocus: CENTER }
-            )
-            full: gatsbyImageData(
-              width: 1920
+              width: 600
+              height: 600
               placeholder: BLURRED
               formats: [AUTO, WEBP]
               quality: 85
+              transformOptions: { fit: COVER, cropFocus: CENTER }
+            )
+            full: gatsbyImageData(
+              width: 2400
+              placeholder: BLURRED
+              formats: [AUTO, WEBP]
+              quality: 90
               transformOptions: { fit: INSIDE }
             )
           }

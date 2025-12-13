@@ -7,11 +7,11 @@ export const WEDDING_DATE = "2026년 3월 2일, 월요일 17시 30분";
 export const WEDDING_LOCATION = "엘리에나 호텔, 5층 그랜드볼룸";
 
 export const GROOM_NAME = "손샘";
-export const GROOM_ACCOUNT_NUMBER = "○○은행 ***-***-******";
-export const GROOM_FATHER_NAME = "○○○";
+export const GROOM_ACCOUNT_NUMBER = "우리은행 1002-948-508813";
+export const GROOM_FATHER_NAME = "손대수";
 export const GROOM_FATHER_ACCOUNT_NUMBER = "○○은행 ***-***-******";
-export const GROOM_MOTHER_NAME = "○○○";
-export const GROOM_MOTHER_ACCOUNT_NUMBER = "○○은행 ***-***-******";
+export const GROOM_MOTHER_NAME = "김경아";
+export const GROOM_MOTHER_ACCOUNT_NUMBER = "수협 2020-4516-5949";
 
 export const BRIDE_NAME = "이나영";
 export const BRIDE_ACCOUNT_NUMBER = "우리은행 1002-548-487778";
