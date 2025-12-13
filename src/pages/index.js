@@ -156,7 +156,7 @@ const IndexPage = () => {
       <Location />
       <Quote />
       <CongratulatoryMoney />
-      <Share />
+      {/* <Share /> */}
       <Footer
         style={{
           background: "#D7CCC8",
@@ -165,7 +165,7 @@ const IndexPage = () => {
           textAlign: "center",
         }}
       >
-        Copyright © 2022 Shin Jooyoung
+        {/* Copyright © 2022 Shin Jooyoung */}
       </Footer>
     </Wrapper>
   );

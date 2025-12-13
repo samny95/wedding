@@ -220,7 +220,7 @@ const Gallery = () => {
   return (
     <Wrapper>
       <Divider style={{ marginTop: 0, marginBottom: 32 }} plain>
-        <Title>우리의 아름다운 순간</Title>
+        <Title>웨딩 사진</Title>
       </Divider>
       <GridContainer>
         {images.map((image, index) => {
