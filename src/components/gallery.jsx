@@ -148,7 +148,7 @@ const Gallery = () => {
         nodes {
           name
           childImageSharp {
-            thumbnail: gatsbyImageData(
+            gatsbyImageData(
               width: 600
               height: 600
               placeholder: BLURRED
@@ -224,7 +224,7 @@ const Gallery = () => {
       </Divider>
       <GridContainer>
         {images.map((image, index) => {
-          const imageData = getImage(image.childImageSharp.thumbnail);
+          const imageData = getImage(image.childImageSharp);
           return (
             <ImageWrapper key={image.name} onClick={() => handleImageClick(index)}>
               <GatsbyImage image={imageData} alt={`Gallery ${index + 1}`} />
