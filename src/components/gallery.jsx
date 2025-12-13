@@ -1,38 +1,8 @@
-import React from "react";
-import ImageGallery from "react-image-gallery";
+import React, { useState } from "react";
+import { graphql, useStaticQuery } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Divider } from "antd";
 import styled from "styled-components";
-
-import GalleryPhoto1 from "../assets/1-1.jpg";
-import GalleryPhoto2 from "../assets/2-1.jpg";
-import GalleryPhoto3 from "../assets/3-1.jpg";
-import GalleryPhoto4 from "../assets/4-1.jpg";
-import GalleryPhoto5 from "../assets/5-1.jpg";
-import GalleryPhoto6 from "../assets/6-1.jpg";
-import GalleryPhoto7 from "../assets/7-1.jpg";
-import GalleryPhoto8 from "../assets/8-1.jpg";
-import GalleryPhoto9 from "../assets/9-1.jpg";
-import GalleryPhoto10 from "../assets/10-1.jpg";
-import GalleryPhoto11 from "../assets/11-1.jpg";
-import GalleryPhoto12 from "../assets/12-1.jpg";
-import GalleryPhoto13 from "../assets/13-1.jpg";
-import GalleryPhoto14 from "../assets/14-2.jpg";
-import GalleryPhoto15 from "../assets/15-1.jpg";
-import GalleryPhoto16 from "../assets/16-1.jpg";
-import GalleryPhoto17 from "../assets/17-1.jpg";
-import GalleryPhoto18 from "../assets/18-1.jpg";
-import GalleryPhoto19 from "../assets/19-1.jpg";
-import GalleryPhoto20 from "../assets/20-1.jpg";
-import GalleryPhoto21 from "../assets/21-2.jpg";
-import GalleryPhoto22 from "../assets/22-2.jpg";
-import GalleryPhoto23 from "../assets/23-1.jpg";
-import GalleryPhoto24 from "../assets/24-1.jpg";
-import GalleryPhoto25 from "../assets/25-1.jpg";
-import GalleryPhoto26 from "../assets/26-1.jpg";
-import GalleryPhoto27 from "../assets/27-1.jpg";
-import GalleryPhoto28 from "../assets/28-2.jpg";
-import GalleryPhoto29 from "../assets/29-1.jpg";
-import GalleryPhoto30 from "../assets/30-1.jpg";
 
 const Wrapper = styled.div`
   padding-top: 42px;
@@ -49,140 +19,210 @@ const Title = styled.p`
   text-align: center;
 `;
 
-const images = [
-  {
-    original: GalleryPhoto1,
-    thumbnail: GalleryPhoto1,
-  },
-  {
-    original: GalleryPhoto2,
-    thumbnail: GalleryPhoto2,
-  },
-  {
-    original: GalleryPhoto3,
-    thumbnail: GalleryPhoto3,
-  },
-  {
-    original: GalleryPhoto4,
-    thumbnail: GalleryPhoto4,
-  },
-  {
-    original: GalleryPhoto5,
-    thumbnail: GalleryPhoto5,
-  },
-  {
-    original: GalleryPhoto6,
-    thumbnail: GalleryPhoto6,
-  },
-  {
-    original: GalleryPhoto7,
-    thumbnail: GalleryPhoto7,
-  },
-  {
-    original: GalleryPhoto8,
-    thumbnail: GalleryPhoto8,
-  },
-  {
-    original: GalleryPhoto9,
-    thumbnail: GalleryPhoto9,
-  },
-  {
-    original: GalleryPhoto10,
-    thumbnail: GalleryPhoto10,
-  },
-  {
-    original: GalleryPhoto11,
-    thumbnail: GalleryPhoto11,
-  },
-  {
-    original: GalleryPhoto12,
-    thumbnail: GalleryPhoto12,
-  },
-  {
-    original: GalleryPhoto13,
-    thumbnail: GalleryPhoto13,
-  },
-  {
-    original: GalleryPhoto14,
-    thumbnail: GalleryPhoto14,
-  },
-  {
-    original: GalleryPhoto15,
-    thumbnail: GalleryPhoto15,
-  },
-  {
-    original: GalleryPhoto16,
-    thumbnail: GalleryPhoto16,
-  },
-  {
-    original: GalleryPhoto17,
-    thumbnail: GalleryPhoto17,
-  },
-  {
-    original: GalleryPhoto18,
-    thumbnail: GalleryPhoto18,
-  },
-  {
-    original: GalleryPhoto19,
-    thumbnail: GalleryPhoto19,
-  },
-  {
-    original: GalleryPhoto20,
-    thumbnail: GalleryPhoto20,
-  },
-  {
-    original: GalleryPhoto21,
-    thumbnail: GalleryPhoto21,
-  },
-  {
-    original: GalleryPhoto22,
-    thumbnail: GalleryPhoto22,
-  },
-  {
-    original: GalleryPhoto23,
-    thumbnail: GalleryPhoto23,
-  },
-  {
-    original: GalleryPhoto24,
-    thumbnail: GalleryPhoto24,
-  },
-  {
-    original: GalleryPhoto25,
-    thumbnail: GalleryPhoto25,
-  },
-  {
-    original: GalleryPhoto26,
-    thumbnail: GalleryPhoto26,
-  },
-  {
-    original: GalleryPhoto27,
-    thumbnail: GalleryPhoto27,
-  },
-  {
-    original: GalleryPhoto28,
-    thumbnail: GalleryPhoto28,
-  },
-  {
-    original: GalleryPhoto29,
-    thumbnail: GalleryPhoto29,
-  },
-  {
-    original: GalleryPhoto30,
-    thumbnail: GalleryPhoto30,
-  },
-];
+const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 8px;
+  }
+`;
+
+const ImageWrapper = styled.div`
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+  aspect-ratio: 1;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+  
+  .gatsby-image-wrapper {
+    height: 100%;
+    width: 100%;
+  }
+  
+  img {
+    object-fit: cover;
+  }
+`;
+
+const Modal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+`;
+
+const ModalContent = styled.div`
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  .gatsby-image-wrapper {
+    max-width: 100%;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+  }
+  
+  img {
+    object-fit: contain !important;
+    max-height: 90vh;
+  }
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &:hover {
+    background: white;
+  }
+`;
+
+const NavigationButton = styled.button`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  ${props => props.$position === 'left' ? 'left: -60px;' : 'right: -60px;'}
+  
+  &:hover {
+    background: white;
+  }
+  
+  @media (max-width: 768px) {
+    ${props => props.$position === 'left' ? 'left: 10px;' : 'right: 10px;'}
+  }
+`;
 
 const Gallery = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
+  
+  const data = useStaticQuery(graphql`
+    query {
+      allFile(
+        filter: {
+          sourceInstanceName: { eq: "assets" }
+          extension: { eq: "jpg" }
+          name: { regex: "/^[0-9]+-[0-9]+$/" }
+        }
+        sort: { fields: name, order: ASC }
+      ) {
+        nodes {
+          name
+          childImageSharp {
+            gatsbyImageData(
+              width: 400
+              height: 400
+              placeholder: BLURRED
+              formats: [AUTO, WEBP]
+              quality: 75
+              transformOptions: { fit: COVER, cropFocus: CENTER }
+            )
+            full: gatsbyImageData(
+              width: 1920
+              placeholder: BLURRED
+              formats: [AUTO, WEBP]
+              quality: 85
+              transformOptions: { fit: INSIDE }
+            )
+          }
+        }
+      }
+    }
+  `);
+
+  // Sort images numerically by extracting the first number from filename
+  const images = [...data.allFile.nodes].sort((a, b) => {
+    const numA = parseInt(a.name.split('-')[0]);
+    const numB = parseInt(b.name.split('-')[0]);
+    return numA - numB;
+  });
+
+  const handleImageClick = (index) => {
+    setSelectedImage(index);
+  };
+
+  const handleClose = (e) => {
+    if (e.target === e.currentTarget) {
+      setSelectedImage(null);
+    }
+  };
+
+  const handlePrevious = () => {
+    setSelectedImage((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+  };
+
+  const handleNext = () => {
+    setSelectedImage((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+  };
+
   return (
     <Wrapper>
       <Divider style={{ marginTop: 0, marginBottom: 32 }} plain>
         <Title>우리의 아름다운 순간</Title>
       </Divider>
-      <ImageGallery
-        showPlayButton={false}
-        showFullscreenButton={false}
-        items={images}
-      />
+      <GridContainer>
+        {images.map((image, index) => {
+          const imageData = getImage(image.childImageSharp);
+          return (
+            <ImageWrapper key={image.name} onClick={() => handleImageClick(index)}>
+              <GatsbyImage image={imageData} alt={`Gallery ${index + 1}`} />
+            </ImageWrapper>
+          );
+        })}
+      </GridContainer>
+      
+      {selectedImage !== null && (
+        <Modal onClick={handleClose}>
+          <ModalContent>
+            <CloseButton onClick={() => setSelectedImage(null)}>×</CloseButton>
+            <NavigationButton $position="left" onClick={handlePrevious}>‹</NavigationButton>
+            <GatsbyImage
+              image={getImage(images[selectedImage].childImageSharp.full)}
+              alt={`Gallery ${selectedImage + 1}`}
+            />
+            <NavigationButton $position="right" onClick={handleNext}>›</NavigationButton>
+          </ModalContent>
+        </Modal>
+      )}
     </Wrapper>
   );
 };
