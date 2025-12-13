@@ -39,12 +39,20 @@ const Quote = () => {
     <Wrapper>
       <Image src={Flower} data-aos="fade-up" />
       <Content data-aos="fade-up">
-        Under
+        I see the crystal raindrops fall
         <br />
-        Construction
+        And the beauty of it all
+        <br />
+        Is when the sun comes shining through
+        <br />
+        To make those rainbows in my mind
+        <br />
+        When I think of you sometime
+        <br />
+        And I wanna spend some time with you
         <br />
         <br />
-        - 이나영, (이나영) -
+        - From 'Just the two of us' -
         <br />
         <br />
       </Content>
