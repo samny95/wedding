@@ -87,17 +87,20 @@ const CongratulatoryMoney = () => {
         plain
         style={{ marginTop: 0, marginBottom: 32 }}
       >
-        <Title>축하의 마음을 전하세요</Title>
+        <Title>마음 전하실 곳</Title>
       </Divider>
       <Image src={Flower} />
       <Content data-aos="fade-up">
-        축하의 마음을 담아 축의금을 전달해 보세요.
+        멀리서도 축하의 마음을 전하고 싶으신 분들을 위해 계좌번호를 안내드립니다. 
+        <br />
+        <br />
+        소중한 축하를 보내주셔서 감사드립니다.
       </Content>
 
       <ButtonWrap>
         <ContactButton data-aos="fade-up" onClick={() => setGroomVisible(true)}>
           <CheckCircleTwoTone
-            style={{ fontSize: 64, marginBottom: 16 }}
+            style={{ fontSize: 48, marginBottom: 16 }}
             twoToneColor="#829fe0"
           />
           <br />
@@ -105,7 +108,7 @@ const CongratulatoryMoney = () => {
         </ContactButton>
         <ContactButton data-aos="fade-up" onClick={() => setBrideVisible(true)}>
           <CheckCircleTwoTone
-            style={{ fontSize: 64, marginBottom: 16 }}
+            style={{ fontSize: 48, marginBottom: 16 }}
             twoToneColor="#fe7daf"
           />
           <br />

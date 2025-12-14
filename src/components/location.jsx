@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Divider } from "antd";
 import styled from "styled-components";
 import Flower from "../assets/flower2.png";
@@ -46,13 +46,76 @@ const MapImg = styled.img`
   max-width: 500px;
   margin: 20px auto 0;
   display: block;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.02);
+  }
 
   @media (max-width: 768px) {
     max-width: 100%;
   }
 `;
 
+const Modal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+`;
+
+const ModalContent = styled.div`
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ModalImage = styled.img`
+  max-width: 100%;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &:hover {
+    background: white;
+  }
+
+  @media (max-width: 768px) {
+    top: 10px;
+    right: 10px;
+  }
+`;
+
 const Location = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   // 카카오 맵 불러오기
 
   // <!-- 3. 실행 스크립트 -->
@@ -104,6 +167,27 @@ const Location = () => {
     InstallScript();
   }, [InstallScript]);
 
+  const handleImageClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleClose = (e) => {
+    if (e.target === e.currentTarget) {
+      setIsModalOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isModalOpen) {
+        setIsModalOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isModalOpen]);
+
   return (
     <Wrapper>
       <Divider plain style={{ marginTop: 0, marginBottom: 32 }}>
@@ -114,7 +198,15 @@ const Location = () => {
         id="daumRoughmapContainer1765440937193"
         className="root_daum_roughmap root_daum_roughmap_landing"
       ></Map>
-      <MapImg src={MapImage} alt="Location Map" />
+      <MapImg src={MapImage} alt="Location Map" onClick={handleImageClick} />
+      {isModalOpen && (
+        <Modal onClick={handleClose}>
+          <ModalContent>
+            <CloseButton onClick={() => setIsModalOpen(false)}>×</CloseButton>
+            <ModalImage src={MapImage} alt="Location Map" />
+          </ModalContent>
+        </Modal>
+      )}
       <Content>
         서울 강남구 논현로 645
         <br />

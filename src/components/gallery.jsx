@@ -122,13 +122,17 @@ const NavigationButton = styled.button`
   align-items: center;
   justify-content: center;
   ${props => props.$position === 'left' ? 'left: -60px;' : 'right: -60px;'}
+  z-index: 10000;
   
   &:hover {
     background: white;
   }
   
   @media (max-width: 768px) {
-    ${props => props.$position === 'left' ? 'left: 10px;' : 'right: 10px;'}
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    ${props => props.$position === 'left' ? 'left: 5px;' : 'right: 5px;'}
   }
 `;
 

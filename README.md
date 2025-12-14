@@ -1,34 +1,24 @@
 # 모바일 청첩장 React.js 템플릿
 
 결혼식 초대를 위한 청첩장 템플릿입니다.  
-이 저장소가 마음에 들거나 사용하게 되신다면, Star와 Fork 부탁드리겠습니다😉
 
-## 👰🏻‍♀️ 미리 보기
+> **Original Repo**: [https://github.com/S-jooyoung/WEDDING_INVITATION](https://github.com/S-jooyoung/WEDDING_INVITATION)  
+> 이 프로젝트는 위 repo를 기반으로 수정되었습니다.
 
-https://wedding-templete.netlify.app/
+## 주요 변경사항
+
+- 갤러리 모바일 레이아웃을 3열 그리드로 변경
+- 갤러리 네비게이션 버튼 모바일 화면에서 표시 개선
+- 지도 이미지 클릭 시 확대 보기 모달 추가
+- 마음 전하실 곳 아이콘 크기 조정
 
 ## 📚 내용 및 기능
 
 - 결혼식 날짜, 위치, 인사말 출력
 - 사진첩
 - 축의금을 보내실 곳 (계좌번호 클립보드 복사 기능 지원)
-- 카카오톡 공유 기능 및 링크 공유 기능
+<!-- - 카카오톡 공유 기능 및 링크 공유 기능 -->
 
-## 🚘 시작하기
-
-1. `$ cd WEDDING_INVITATION` - 해당 프로젝트 폴더로 이동
-2. `$ npm install` - 디펜던시 설치
-3. `$ npm start` - 로컬로 실행
-
-## 🔧 Netlify로 만들기
-
-Netlify로 만드신다면 아래 글을 참고하세요 🕵🏻‍♂️
-
-[Gatsby 테마로 모바일 결혼 청첩장 만들기](https://joy.pe.kr/gatsby-wedding-deploy/)
-
-## ❌ 오류 발생 시
-
-`rm -rf package-lock.json` 과 `rm -rf node_modules` 후 다시 `npm install` 수행
 
 ## 🛠 커스터마이징
 
