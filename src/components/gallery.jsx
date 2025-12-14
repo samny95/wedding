@@ -156,15 +156,15 @@ const Gallery = () => {
               width: 800
               height: 800
               placeholder: BLURRED
-              formats: [AUTO, WEBP, AVIF]
-              quality: 95
+              formats: [AUTO, WEBP]
+              quality: 92
               transformOptions: { fit: COVER, cropFocus: CENTER }
             )
             full: gatsbyImageData(
-              width: 3000
+              width: 2400
               placeholder: BLURRED
-              formats: [AUTO, WEBP, AVIF]
-              quality: 98
+              formats: [AUTO, WEBP]
+              quality: 95
               transformOptions: { fit: INSIDE }
             )
           }
