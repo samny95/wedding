@@ -5,6 +5,18 @@ module.exports = {
     siteUrl: `https://www.yourdomain.tld`
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        trackingIds: [
+          "G-Y11DT5E9L4",
+        ],
+        pluginConfig: {
+          head: true,
+          respectDNT: true,
+        },
+      },
+    },
     "gatsby-plugin-styled-components",
     "gatsby-plugin-image",
     {
