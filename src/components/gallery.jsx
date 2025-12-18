@@ -266,6 +266,12 @@ const Gallery = () => {
         </ShowMoreButton>
       )}
       
+      {showAll && images.length > 12 && (
+        <ShowMoreButton onClick={() => setShowAll(false)}>
+          접기
+        </ShowMoreButton>
+      )}
+      
       {selectedImage !== null && (
         <Modal onClick={handleClose}>
           <ModalContent>
