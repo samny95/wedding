@@ -6,7 +6,7 @@ import {
   GROOM_NAME,
   BRIDE_NAME,
 } from "../../config.js";
-import TitleImage from "../assets/25-1.jpg";
+import TitleImage from "../assets/33-1.jpg";
 
 const Layout = styled.div`
   width: 70%;

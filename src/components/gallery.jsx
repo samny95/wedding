@@ -136,8 +136,28 @@ const NavigationButton = styled.button`
   }
 `;
 
+const ShowMoreButton = styled.button`
+  display: block;
+  margin: 20px auto;
+  padding: 12px 32px;
+  background: var(--title-color);
+  color: white;
+  border: none;
+  border-radius: 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    opacity: 0.8;
+    transform: translateY(-2px);
+  }
+`;
+
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [showAll, setShowAll] = useState(false);
   
   const data = useStaticQuery(graphql`
     query {
@@ -221,21 +241,30 @@ const Gallery = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedImage]);
 
+  const displayedImages = showAll ? images : images.slice(0, 12);
+
   return (
     <Wrapper>
       <Divider style={{ marginTop: 0, marginBottom: 32 }} plain>
         <Title>웨딩 사진</Title>
       </Divider>
       <GridContainer>
-        {images.map((image, index) => {
+        {displayedImages.map((image, index) => {
           const imageData = getImage(image.childImageSharp);
+          const originalIndex = showAll ? index : index;
           return (
-            <ImageWrapper key={image.name} onClick={() => handleImageClick(index)}>
+            <ImageWrapper key={image.name} onClick={() => handleImageClick(originalIndex)}>
               <GatsbyImage image={imageData} alt={`Gallery ${index + 1}`} />
             </ImageWrapper>
           );
         })}
       </GridContainer>
+      
+      {!showAll && images.length > 12 && (
+        <ShowMoreButton onClick={() => setShowAll(true)}>
+          더 보기
+        </ShowMoreButton>
+      )}
       
       {selectedImage !== null && (
         <Modal onClick={handleClose}>
