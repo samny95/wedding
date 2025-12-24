@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Layout } from "antd";
 import styled from "styled-components";
+import { Helmet } from "react-helmet";
 import "react-image-gallery/styles/css/image-gallery.css";
 import "antd/dist/antd.css";
 import Gallery from "../components/gallery";
@@ -135,6 +136,14 @@ const IndexPage = () => {
 
   return (
     <Wrapper>
+      <Helmet>
+        <title>Sam & Nayoung's Wedding Invitation</title>
+        <meta name="description" content="We are getting married! Please join us to celebrate our special day on March 2nd, 2026." />
+        <meta property="og:title" content="Sam & Nayoung's Wedding Invitation" />
+        <meta property="og:description" content="We are getting married! Please join us to celebrate our special day on March 2nd, 2026." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://samny95.github.io/wedding/" />
+      </Helmet>
       <audio id="bgMusic" autoPlay loop muted>
         <source src={Song} type="audio/mpeg" />
         Your browser does not support the audio element.

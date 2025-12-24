@@ -5,9 +5,14 @@
 > **Original Repo**: [https://github.com/S-jooyoung/WEDDING_INVITATION](https://github.com/S-jooyoung/WEDDING_INVITATION)  
 > 이 프로젝트는 위 repo를 기반으로 수정되었습니다.
 
+## To-Do:
+- RSVP 기능 추가
+
 ## 주요 변경사항
 
 - 갤러리 모바일 레이아웃을 3열 그리드로 변경
+- 갤러리 더보기/접기 버튼 추가
+- 프리뷰 제목, 정보 추가
 - 갤러리 네비게이션 버튼 모바일 화면에서 표시 개선
 - 지도 이미지 클릭 시 확대 보기 모달 추가
 - 마음 전하실 곳 아이콘 크기 조정

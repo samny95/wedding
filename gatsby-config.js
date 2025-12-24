@@ -1,8 +1,9 @@
 module.exports = {
   pathPrefix: "/wedding",  // <- repo name
   siteMetadata: {
-    title: `weddingInvitation`,
-    siteUrl: `https://www.yourdomain.tld`
+    title: `Sam & Nayoung's Wedding Invitation`,
+    description: `We are getting married! Please join us to celebrate our special day.`,
+    siteUrl: `https://samny95.github.io`
   },
   plugins: [
     {
