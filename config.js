@@ -1,7 +1,6 @@
 export const WEDDING_INVITATION_URL = "https://samny95.github.io/wedding/";
 export const KAKAOTALK_API_TOKEN = "JavaScript 키 입력";
-export const KAKAOTALK_SHARE_IMAGE =
-  "https://cdn.pixabay.com/photo/2014/11/13/17/04/heart-529607_960_720.jpg";
+export const KAKAOTALK_SHARE_IMAGE = "https://samny95.github.io/wedding/og-image.jpg";
 
 export const WEDDING_DATE = "2026년 3월 2일, 월요일 17시 30분";
 export const WEDDING_LOCATION = "엘리에나 호텔, 5층 그랜드볼룸";

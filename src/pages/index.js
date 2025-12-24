@@ -137,12 +137,15 @@ const IndexPage = () => {
   return (
     <Wrapper>
       <Helmet>
-        <title>Sam & Nayoung's Wedding Invitation</title>
-        <meta name="description" content="We are getting married! Please join us to celebrate our special day on March 2nd, 2026." />
-        <meta property="og:title" content="Sam & Nayoung's Wedding Invitation" />
-        <meta property="og:description" content="We are getting married! Please join us to celebrate our special day on March 2nd, 2026." />
+        <title>손샘❤이나영 결혼식에 초대합니다</title>
+        <meta name="description" content="2026년 3월 2일, 월요일 17시 30분 | 엘리에나 호텔, 5층 그랜드볼룸" />
+        <meta property="og:title" content="손샘❤이나영 결혼식에 초대합니다" />
+        <meta property="og:description" content="2026년 3월 2일, 월요일 17시 30분 | 엘리에나 호텔, 5층 그랜드볼룸" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://samny95.github.io/wedding/" />
+        {/* <meta property="og:image" content="https://samny95.github.io/wedding/og-image.jpg" />
+        <meta property="og:image:width" content="800" />
+        <meta property="og:image:height" content="1200" /> */}
       </Helmet>
       <audio id="bgMusic" autoPlay loop muted>
         <source src={Song} type="audio/mpeg" />
