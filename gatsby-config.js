@@ -1,9 +1,10 @@
 module.exports = {
   pathPrefix: "/wedding",  // <- repo name
   siteMetadata: {
-    title: `Sam & Nayoung's Wedding Invitation`,
-    description: `We are getting married! Please join us to celebrate our special day.`,
-    siteUrl: `https://samny95.github.io`
+    title: `손샘❤이나영 결혼식에 초대합니다`,
+    description: `2026년 3월 2일, 월요일 17시 30분 | 엘리에나 호텔, 5층 그랜드볼룸`,
+    siteUrl: `https://samny95.github.io`,
+    image: `/og-image.jpg`
   },
   plugins: [
     {
@@ -18,6 +19,7 @@ module.exports = {
         },
       },
     },
+    "gatsby-plugin-react-helmet",
     "gatsby-plugin-styled-components",
     "gatsby-plugin-image",
     {
