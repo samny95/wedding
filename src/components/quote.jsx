@@ -52,7 +52,7 @@ const Quote = () => {
         And I wanna spend some time with you
         <br />
         <br />
-        - From 'Just the Two of Us' -
+        - ♪ From 'Just the Two of Us' ♪ -
         <br />
         <br />
       </Content>

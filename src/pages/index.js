@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Layout } from "antd";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
@@ -12,6 +12,7 @@ import "../styles/index.css";
 import GroovePaper from "../assets/GroovePaper.png";
 import Location from "../components/location";
 import CongratulatoryMoney from "../components/congratulatoryMoney";
+import RSVP from "../components/rsvp";
 import Share from "../components/share";
 import Quote from "../components/quote";
 import Song from "../assets/[MapleStory BGM] Amoria.mp3";
@@ -74,8 +75,55 @@ const MusicButton = styled.button`
   }
 `;
 
+const RSVPFloatingButton = styled.button`
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(124, 136, 255, 0.9);
+  border: 2px solid #6b7aff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  
+  &:hover {
+    background: rgba(107, 122, 255, 1);
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+
+  svg {
+    width: 28px;
+    height: 28px;
+    fill: white;
+  }
+
+  @media (max-width: 768px) {
+    width: 50px;
+    height: 50px;
+    bottom: 80px;
+    right: 20px;
+    
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+`;
+
 const IndexPage = () => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const rsvpRef = useRef(null);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -134,6 +182,12 @@ const IndexPage = () => {
     }
   };
 
+  const handleRSVPClick = () => {
+    if (rsvpRef.current) {
+      rsvpRef.current.openModal();
+    }
+  };
+
   return (
     <Wrapper>
       <Helmet>
@@ -162,8 +216,14 @@ const IndexPage = () => {
           </svg>
         )}
       </MusicButton>
+      <RSVPFloatingButton onClick={handleRSVPClick} aria-label="Open RSVP form">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
+        </svg>
+      </RSVPFloatingButton>
       <Title />
       <Greeting />
+      <RSVP ref={rsvpRef} />
       <Gallery />
       <Location />
       <CongratulatoryMoney />

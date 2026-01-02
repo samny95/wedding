@@ -27,7 +27,7 @@ const Title = styled.p`
 `;
 
 const Content = styled.p`
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   line-height: 1.75;
   opacity: 0.75;
   margin-bottom: 16px;
