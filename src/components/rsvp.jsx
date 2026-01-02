@@ -25,7 +25,7 @@ const Title = styled.p`
 `;
 
 const Message = styled.p`
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   line-height: 1.75;
   opacity: 0.75;
   margin-bottom: 16px;
@@ -177,8 +177,8 @@ const RSVP = forwardRef((props, ref) => {
     side: "groom",
     name: "",
     phone4: "",
-    guests: "",
     attendance: "attending",
+    guests: "",
     privacyAgreed: false,
   });
 
@@ -198,14 +198,19 @@ const RSVP = forwardRef((props, ref) => {
       side: "groom",
       name: "",
       phone4: "",
-      guests: "",
       attendance: "attending",
+      guests: "",
       privacyAgreed: false,
     });
   };
 
   const handleInputChange = (field, value) => {
-    setFormData({ ...formData, [field]: value });
+    if (field === "attendance" && value === "notAttending") {
+      // Auto-set guests to 0 if not attending
+      setFormData({ ...formData, [field]: value, guests: "0" });
+    } else {
+      setFormData({ ...formData, [field]: value });
+    }
   };
 
   const validateForm = () => {
@@ -217,14 +222,16 @@ const RSVP = forwardRef((props, ref) => {
       message.warning("전화번호 뒷자리 4자리를 입력해주세요.");
       return false;
     }
-    if (!formData.guests.trim() || isNaN(formData.guests) || parseInt(formData.guests) < 1) {
-      message.warning("참석인원을 올바르게 입력해주세요.");
-      return false;
+    if (formData.attendance === "attending") {
+      if (!formData.guests.trim() || isNaN(formData.guests) || parseInt(formData.guests) < 1) {
+        message.warning("참석인원을 1명 이상 입력해주세요.");
+        return false;
+      }
     }
-    if (!formData.privacyAgreed) {
-      message.warning("개인정보 수집 및 이용에 동의해주세요.");
-      return false;
-    }
+    // if (!formData.privacyAgreed) {
+    //   message.warning("개인정보 수집 및 이용에 동의해주세요.");
+    //   return false;
+    // }
     return true;
   };
 
@@ -257,9 +264,9 @@ const RSVP = forwardRef((props, ref) => {
           side: sideMapping[formData.side] || formData.side,
           name: formData.name,
           phone4: formData.phone4,
+          attendance: formData.attendance === "attending" ? "참석" : 
+                     formData.attendance === "notAttending" ? "불참" : "미정",
           guests: formData.guests,
-          // attendance: formData.attendance === "attending" ? "예정" : 
-          //            formData.attendance === "notAttending" ? "안함" : "미정",
         }),
       });
 
@@ -329,6 +336,36 @@ const RSVP = forwardRef((props, ref) => {
         </FormItem>
 
         <FormItem>
+          <Label required>참석 여부</Label>
+          <StyledRadioGroup
+            value={formData.attendance}
+            onChange={(e) => handleInputChange("attendance", e.target.value)}
+            buttonStyle="solid"
+          >
+            <Radio.Button value="attending">참석</Radio.Button>
+            <Radio.Button value="notAttending">불참</Radio.Button>
+            <Radio.Button value="undecided">미정</Radio.Button>
+          </StyledRadioGroup>
+          <Note>
+            {/* ※ 전달한 내용은 수정이 불가합니다.<br />
+            내용 변경이 있을 경우 재전달해주세요. */}
+            ※ 추후 내용 변경이 있을 경우 다시 전달 (submit) 해주세요.
+          </Note>
+        </FormItem>
+
+        <FormItem>
+          <Label required={formData.attendance === "attending"}>참석인원</Label>
+          <StyledInput
+            placeholder="본인 포함 총 참석인원수"
+            type="number"
+            min={formData.attendance === "attending" ? "1" : "0"}
+            value={formData.guests}
+            onChange={(e) => handleInputChange("guests", e.target.value)}
+            disabled={formData.attendance === "notAttending"}
+          />
+        </FormItem>
+
+        <FormItem>
           <Label required>전화번호 뒷자리 (식별번호)</Label>
           <StyledInput
             placeholder="전화번호 뒷 4자리"
@@ -342,29 +379,13 @@ const RSVP = forwardRef((props, ref) => {
           </Note>
         </FormItem>
 
-        <FormItem>
-          <Label required>참석인원</Label>
-          <StyledInput
-            placeholder="본인 포함 총 참석인원수"
-            type="number"
-            min="1"
-            value={formData.guests}
-            onChange={(e) => handleInputChange("guests", e.target.value)}
-          />
-          <Note>
-            {/* ※ 전달한 내용은 수정이 불가합니다.<br />
-            내용 변경이 있을 경우 재전달해주세요. */}
-            ※ 내용 변경이 있을 경우 다시 전달 (submit) 해주세요.
-
-          </Note>
-        </FormItem>
-
-        <Collapse
+        {/* Privacy section temporarily commented out */}
+        {/* <Collapse
           bordered={false}
           ghost
           expandIcon={({ isActive }) => <DownOutlined rotate={isActive ? 180 : 0} />}
-        >
-          <Panel header="개인정보 수집 및 이용 동의 (필수)" key="1">
+        > */}
+          {/* <Panel header="개인정보 수집 및 이용 동의 (필수)" key="1">
             <PrivacyContent>
                   <p>참석여부 전달을 위한 개인정보 수집 및 이용에 동의해주세요.</p>
                   
@@ -375,20 +396,20 @@ const RSVP = forwardRef((props, ref) => {
                   <p>개인정보 수집 및 이용에 대한 동의를 거부할 권리가 있으며 동의 거부 시 참석여부 서비스 이용이 불가합니다.</p>
             </PrivacyContent>
           </Panel>
-        </Collapse>
+        </Collapse> */}
 
-        <Checkbox
+        {/* <Checkbox
           checked={formData.privacyAgreed}
           onChange={(e) => handleInputChange("privacyAgreed", e.target.checked)}
           style={{ marginTop: 16 }}
         >
           수집 및 이용에 동의합니다.
-        </Checkbox>
+        </Checkbox> */}
 
         <SubmitButton
           onClick={handleSubmit}
           loading={loading}
-          disabled={!formData.privacyAgreed}
+          // disabled={!formData.privacyAgreed}
         >
           참석 의사 전달
         </SubmitButton>

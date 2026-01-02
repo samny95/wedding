@@ -12,7 +12,8 @@ This guide will help you set up a Google Sheets backend to receive RSVP submissi
    - B1: `Side` (신랑/신부)
    - C1: `Name` (성명)
    - D1: `Phone4` (전화번호 뒷자리)
-   - E1: `Guests` (참석인원)
+   - E1: `Attendance` (참석여부)
+   - F1: `Guests` (참석인원)
 
 ## Step 2: Create Google Apps Script
 
@@ -46,11 +47,12 @@ function doPost(e) {
     
     if (existingRowIndex > -1) {
       // Update existing row
-      sheet.getRange(existingRowIndex, 1, 1, 5).setValues([[
+      sheet.getRange(existingRowIndex, 1, 1, 6).setValues([[
         data.timestamp,
         data.side,
         data.name,
         "'" + data.phone4,  // Prepend apostrophe to force text format
+        data.attendance,
         data.guests
       ]]);
     } else {
@@ -60,6 +62,7 @@ function doPost(e) {
         data.side,
         data.name,
         "'" + data.phone4,  // Prepend apostrophe to force text format
+        data.attendance,
         data.guests
       ]);
     }
@@ -173,12 +176,13 @@ Add validation before appending the row:
 
 ```javascript
 // Validate data
-if (!data.name || !data.guests || !data.attendance) {
+if (!data.name || !data.phone4 || !data.attendance) {
   throw new Error("Missing required fields");
 }
 
-if (isNaN(data.guests) || parseInt(data.guests) < 1) {
-  throw new Error("Invalid guest count");
+// Validate guests count based on attendance
+if (data.attendance === "attending" && (isNaN(data.guests) || parseInt(data.guests) < 1)) {
+  throw new Error("Invalid guest count for attending");
 }
 ```
 
