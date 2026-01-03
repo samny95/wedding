@@ -11,9 +11,9 @@ This guide will help you set up a Google Sheets backend to receive RSVP submissi
    - A1: `Timestamp`
    - B1: `Side` (신랑/신부)
    - C1: `Name` (성명)
-   - D1: `Phone4` (전화번호 뒷자리)
-   - E1: `Attendance` (참석여부)
-   - F1: `Guests` (참석인원)
+   <!-- - D1: `Phone4` (전화번호 뒷자리) -->
+   - D1: `Attendance` (참석여부)
+   - E1: `Guests` (참석인원)
 
 ## Step 2: Create Google Apps Script
 
@@ -30,16 +30,16 @@ function doPost(e) {
     // Parse the incoming data
     var data = JSON.parse(e.postData.contents);
     
-    // Check for existing entry with same name and phone4
+    // Check for existing entry with same name and side
     var dataRange = sheet.getDataRange();
     var values = dataRange.getValues();
     var existingRowIndex = -1;
     
     // Start from row 2 (skip header row)
     for (var i = 1; i < values.length; i++) {
-      // Check if name (column C) and phone4 (column D) match
-      if (values[i][2] === data.name && 
-          values[i][3] === data.phone4) {
+      // Check if side (column B) and name (column C) match
+      if (values[i][1] === data.side && 
+          values[i][2] === data.name) {
         existingRowIndex = i + 1; // Sheet rows are 1-indexed
         break;
       }
@@ -47,11 +47,10 @@ function doPost(e) {
     
     if (existingRowIndex > -1) {
       // Update existing row
-      sheet.getRange(existingRowIndex, 1, 1, 6).setValues([[
+      sheet.getRange(existingRowIndex, 1, 1, 5).setValues([[
         data.timestamp,
         data.side,
         data.name,
-        "'" + data.phone4,  // Prepend apostrophe to force text format
         data.attendance,
         data.guests
       ]]);
@@ -61,7 +60,6 @@ function doPost(e) {
         data.timestamp,
         data.side,
         data.name,
-        "'" + data.phone4,  // Prepend apostrophe to force text format
         data.attendance,
         data.guests
       ]);
@@ -176,12 +174,12 @@ Add validation before appending the row:
 
 ```javascript
 // Validate data
-if (!data.name || !data.phone4 || !data.attendance) {
+if (!data.side || !data.name || !data.attendance) {
   throw new Error("Missing required fields");
 }
 
 // Validate guests count based on attendance
-if (data.attendance === "attending" && (isNaN(data.guests) || parseInt(data.guests) < 1)) {
+if (data.attendance === "참석" && (isNaN(data.guests) || parseInt(data.guests) < 1)) {
   throw new Error("Invalid guest count for attending");
 }
 ```

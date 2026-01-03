@@ -176,7 +176,7 @@ const RSVP = forwardRef((props, ref) => {
   const [formData, setFormData] = useState({
     side: "groom",
     name: "",
-    phone4: "",
+    // phone4: "",
     attendance: "attending",
     guests: "",
     privacyAgreed: false,
@@ -197,7 +197,7 @@ const RSVP = forwardRef((props, ref) => {
     setFormData({
       side: "groom",
       name: "",
-      phone4: "",
+      // phone4: "",
       attendance: "attending",
       guests: "",
       privacyAgreed: false,
@@ -218,10 +218,10 @@ const RSVP = forwardRef((props, ref) => {
       message.warning("성명을 입력해주세요.");
       return false;
     }
-    if (!formData.phone4.trim() || !/^\d{4}$/.test(formData.phone4)) {
-      message.warning("전화번호 뒷자리 4자리를 입력해주세요.");
-      return false;
-    }
+    // if (!formData.phone4.trim() || !/^\d{4}$/.test(formData.phone4)) {
+    //   message.warning("전화번호 뒷자리 4자리를 입력해주세요.");
+    //   return false;
+    // }
     if (formData.attendance === "attending") {
       if (!formData.guests.trim() || isNaN(formData.guests) || parseInt(formData.guests) < 1) {
         message.warning("참석인원을 1명 이상 입력해주세요.");
@@ -249,8 +249,8 @@ const RSVP = forwardRef((props, ref) => {
       const sideMapping = {
         "groom": "신랑",
         "bride": "신부",
-        "groomParents": "신랑 측 혼주",
-        "brideParents": "신부 측 혼주"
+        // "groomParents": "신랑 측 혼주",
+        // "brideParents": "신부 측 혼주"
       };
       
       const response = await fetch(WEBHOOK_URL, {
@@ -263,7 +263,7 @@ const RSVP = forwardRef((props, ref) => {
           timestamp: new Date().toISOString(),
           side: sideMapping[formData.side] || formData.side,
           name: formData.name,
-          phone4: formData.phone4,
+          // phone4: formData.phone4,
           attendance: formData.attendance === "attending" ? "참석" : 
                      formData.attendance === "notAttending" ? "불참" : "미정",
           guests: formData.guests,
@@ -321,8 +321,8 @@ const RSVP = forwardRef((props, ref) => {
           >
             <Radio.Button value="groom">신랑</Radio.Button>
             <Radio.Button value="bride">신부</Radio.Button>
-            <Radio.Button value="groomParents">신랑 측 혼주</Radio.Button>
-            <Radio.Button value="brideParents">신부 측 혼주</Radio.Button>
+            {/* <Radio.Button value="groomParents">신랑 측 혼주</Radio.Button>
+            <Radio.Button value="brideParents">신부 측 혼주</Radio.Button> */}
           </Radio.Group>
         </SideSelector>
 
@@ -365,7 +365,7 @@ const RSVP = forwardRef((props, ref) => {
           />
         </FormItem>
 
-        <FormItem>
+        {/* <FormItem>
           <Label required>전화번호 뒷자리 (식별번호)</Label>
           <StyledInput
             placeholder="전화번호 뒷 4자리"
@@ -377,7 +377,7 @@ const RSVP = forwardRef((props, ref) => {
           <Note>
             중복 확인을 위한 식별번호로 사용됩니다.
           </Note>
-        </FormItem>
+        </FormItem> */}
 
         {/* Privacy section temporarily commented out */}
         {/* <Collapse
