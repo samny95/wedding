@@ -174,7 +174,7 @@ const RSVP = forwardRef((props, ref) => {
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    side: "groom",
+    side: "",
     name: "",
     // phone4: "",
     attendance: "attending",
@@ -195,7 +195,7 @@ const RSVP = forwardRef((props, ref) => {
     setVisible(false);
     // Reset form
     setFormData({
-      side: "groom",
+      side: "",
       name: "",
       // phone4: "",
       attendance: "attending",
@@ -214,6 +214,10 @@ const RSVP = forwardRef((props, ref) => {
   };
 
   const validateForm = () => {
+    if (!formData.side) {
+      message.warning("누구의 하객이신지 선택해주세요.");
+      return false;
+    }
     if (!formData.name.trim()) {
       message.warning("성명을 입력해주세요.");
       return false;
