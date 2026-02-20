@@ -123,7 +123,7 @@ const RSVPFloatingButton = styled.button`
 
 const NotificationBanner = styled.div`
   position: fixed;
-  top: ${props => props.show ? '20px' : '-100px'};
+  bottom: ${props => props.show ? '20px' : '-200px'};
   left: 50%;
   transform: translateX(-50%);
   background: linear-gradient(135deg, #7c88ff 0%, #6b7aff 100%);
@@ -132,7 +132,7 @@ const NotificationBanner = styled.div`
   border-radius: 12px;
   box-shadow: 0 8px 24px rgba(124, 136, 255, 0.4);
   z-index: 2000;
-  transition: top 0.5s ease;
+  transition: bottom 0.5s ease;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -141,7 +141,8 @@ const NotificationBanner = styled.div`
   @media (max-width: 768px) {
     padding: 12px 16px;
     font-size: 0.875rem;
-    top: ${props => props.show ? '10px' : '-100px'};
+    bottom: ${props => props.show ? '10px' : '-200px'};
+    max-width: 95%;
   }
 `;
 
@@ -161,6 +162,11 @@ const BannerContent = styled.div`
 const BannerText = styled.span`
   font-weight: 500;
   line-height: 1.4;
+  white-space: nowrap;
+  
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const BannerButton = styled.button`

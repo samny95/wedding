@@ -2,7 +2,7 @@ import React, { useState, useImperativeHandle, forwardRef } from "react";
 import { Button, Modal, Tabs, Input, Radio, Collapse, Checkbox, message } from "antd";
 import styled from "styled-components";
 import { Divider } from "antd";
-import { CheckCircleTwoTone, DownOutlined } from "@ant-design/icons";
+import { CalendarOutlined, DownOutlined } from "@ant-design/icons";
 
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
@@ -303,7 +303,7 @@ const RSVP = forwardRef((props, ref) => {
       <RSVPButton 
         data-aos="fade-up" 
         onClick={handleOpen}
-        icon={<CheckCircleTwoTone twoToneColor="#ffffff" />}
+        icon={<CalendarOutlined />}
       >
         참석 의사 전달 (RSVP)
       </RSVPButton>
